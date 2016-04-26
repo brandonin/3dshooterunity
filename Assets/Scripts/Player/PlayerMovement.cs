@@ -10,20 +10,21 @@ public class PlayerMovement : MonoBehaviour
     int floorMask;
     float camRayLength = 100f;
 
-    void Awake()
+    void Awake ()
     {
     	floorMask = LayerMask.GetMask ("Floor");
     	anim = GetComponent <Animator> ();
-    	playerRigidbody = GetComponent<Rigidbody> ();
+    	playerRigidbody = GetComponent <Rigidbody> ();
     }
-    void FixedUpdated()
+
+    void FixedUpdated ()
     {
     	float h = Input.GetAxisRaw ("Horizontal");
     	float v = Input.GetAxisRaw ("Vertical");
 
     	Move (h, v);
     	Turning ();
-    	Animating(h, v);
+    	Animating (h, v);
 
 
     }
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     	playerRigidbody.MovePosition (transform.position + movement);
     }
 
-    void Turning()
+    void Turning ()
     {
     	Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     	}
     }
 
-	void Animating(float h, float v)
+	void Animating (float h, float v)
 	{
 		bool walking = h != 0f || v != 0f;
 		anim.SetBool ("IsWalking", walking);
